@@ -36,6 +36,6 @@ jobs:
         name: Create a Pre-Release with the Build
         uses: softprops/action-gh-release@v2.0.9
         with:
-          name: ChapterMaster-Windows-$DATE_TIME
-          tag_name: $DATE_TIME # Assuming you want to use the same date-time for the tag
+          name: ChapterMaster-Windows-${{ steps.get_date_time.outputs.DATE_TIME }}
+          tag_name: ${{ steps.get_date_time.outputs.DATE_TIME }}
           prerelease: true
