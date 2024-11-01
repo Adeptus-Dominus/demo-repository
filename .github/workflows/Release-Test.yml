@@ -6,6 +6,7 @@ on:
 jobs:
   build:
     runs-on: windows-2022
+    permissions: write-all
     steps:
       # Check out the repository with the GameMaker project
       - uses: actions/checkout@v4
