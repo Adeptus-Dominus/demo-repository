@@ -17,7 +17,9 @@ jobs:
       
       - id: get_date_time
         name: Get Current Date
-        run: echo "date_time=$(date +%Y-%m-%d-%H%M)" >> $GITHUB_ENV
+        run: |
+          $date_time = (Get-Date).ToString("yyyy-MM-dd-HHmm")
+          echo "date_time=$date_time" >> $GITHUB_ENV
 
       - name: Debug Date Output
         run: echo "$env:date_time"
