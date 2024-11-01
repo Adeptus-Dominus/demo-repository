@@ -17,10 +17,10 @@ jobs:
       
       - id: get_date_time
         name: Get Current Date
-        run: echo "date_time=$(date +%Y-%m-%d-%H%M)" >> $GITHUB_OUTPUT
+        run: echo "date_time=$(date +%Y-%m-%d-%H%M)" >> $GITHUB_ENV
 
       - name: Debug Date Output
-        run: echo "${{ steps.get_date_time.outputs.date_time }}"
+        run: echo "${{ env.date_time }}"
 
       - name: Bump version and push tag
         id: tag_version
