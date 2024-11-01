@@ -21,7 +21,7 @@ jobs:
 
       - name: Debug Date Output
         run: |
-          echo echo "${{ steps.get_date_time.outputs.date_time }}"
+          echo "${{ steps.get_date_time.outputs.date_time }}"
 
       - name: Bump version and push tag
         id: tag_version
