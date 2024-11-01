@@ -1,0 +1,25 @@
+name: Create-Release-Test
+on: 
+  # push: #Uncomment this line to run the workflow on push
+  workflow_dispatch: #This line allows you to run the workflow manually from the GitHub Actions page
+  workflow_call: #This line allows you to run the workflow from another workflow
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      # Check out the repository with the GameMaker project
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - id: get_date_time
+        name: Get Current Date
+        run: echo "date_time::$(date +'%d-%m-%Y-%H%M')" >> $GITHUB_OUTPUT
+      - id: create_release
+        name: Create a Pre-Release with the Build
+        uses: softprops/action-gh-release@v2.0.9
+        with:
+          name: ChapterMaster-Windows-${{ steps.get_date_time.outputs.date_time }}
+          tag_name: ${{ steps.get_date_time.outputs.date_time }}
+          files: ${{ steps.igor_build.outputs.out-dir }}
+          prerelease: true
+          
