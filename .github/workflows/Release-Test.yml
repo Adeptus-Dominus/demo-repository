@@ -30,7 +30,7 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          custom_tag: $DATE_TIME
+          custom_tag: ${{ steps.get_date_time.outputs.DATE_TIME }}
 
       - id: create_release
         name: Create a Pre-Release with the Build
@@ -38,5 +38,4 @@ jobs:
         with:
           name: ChapterMaster-Windows-$DATE_TIME
           tag_name: $DATE_TIME # Assuming you want to use the same date-time for the tag
-          files: ${{ steps.igor_build.outputs.out-dir }} # **NOTE:** This step won't work because `igor_build` is not defined in your provided workflow. You'll need to define this step or correct the reference.
           prerelease: true
