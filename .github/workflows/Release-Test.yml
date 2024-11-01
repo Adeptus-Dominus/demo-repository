@@ -17,25 +17,23 @@ jobs:
       
       - id: get_date_time
         name: Get Current Date
-        run: |
-          echo "Direct Date Output: $(date +%Y-%m-%d-%H%M)"
-          echo "DATE_TIME=$(date +%Y-%m-%d-%H%M)" >> $GITHUB_ENV
+        run: echo "date=$(date +%Y-%m-%d-%H%M)" >> "$GITHUB_OUTPUT"
 
       - name: Debug Date Output
         run: |
-          echo "Date Time: $DATE_TIME"
+          echo ${{ steps.get_date_time.outputs.date }}
 
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          custom_tag: ${{ steps.get_date_time.outputs.DATE_TIME }}
+          custom_tag: ${{ steps.get_date_time.outputs.date }}
 
       - id: create_release
         name: Create a Pre-Release with the Build
         uses: softprops/action-gh-release@v2.0.9
         with:
-          name: ChapterMaster-Windows-${{ steps.get_date_time.outputs.DATE_TIME }}
-          tag_name: ${{ steps.get_date_time.outputs.DATE_TIME }}
+          name: ChapterMaster-Windows-${{ steps.get_date_time.outputs.date }}
+          tag_name: ${{ steps.get_date_time.outputs.date }}
           prerelease: true
