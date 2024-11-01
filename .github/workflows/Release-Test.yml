@@ -17,12 +17,14 @@ jobs:
       
       - id: get_date_time
         name: Get Current Date
+        shell: pwsh
         run: |
           $date_time = (Get-Date).ToString("yyyy-MM-dd-HHmm")
-          echo "date_time=$date_time" >> $GITHUB_ENV
+          echo "date_time=$date_time" >> $env:GITHUB_ENV
 
       - name: Debug Date Output
-        run: echo "$env:date_time"
+        shell: pwsh
+        run: echo $env:date_time
 
       - name: Bump version and push tag
         id: tag_version
